@@ -100,7 +100,6 @@ public class Client {
         // Récupérer le mot de passe du formulaire
         String nouveauMotDePasse = request.getParameter("nouveauMotDePasse");
 
-        // Vérifier si le mot de passe a été fourni
         if (nouveauMotDePasse != null && !nouveauMotDePasse.isEmpty()) {
             // Encoder le nouveau mot de passe et le mettre à jour
             utilisateur.setPassword(bCryptPasswordEncoder.encode(nouveauMotDePasse));
