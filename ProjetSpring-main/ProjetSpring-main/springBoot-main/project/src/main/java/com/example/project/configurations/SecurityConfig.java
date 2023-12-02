@@ -54,6 +54,8 @@ public class SecurityConfig {
 				.requestMatchers("/donnee","/css/**").permitAll()
 				.requestMatchers("/updateprofilclientt","/css/**").permitAll()
 				.requestMatchers("donneeClient" ,"/css/**","/js/**","/img/**").permitAll()
+				.requestMatchers("listeprojectadmin" ,"/css/**","/js/**","/img/**").permitAll()
+				.requestMatchers("worksampleadmin" ,"/css/**","/js/**","/img/**").permitAll()
 				.requestMatchers("donneefreelancer","/css/*").permitAll()
 				.requestMatchers("updateuser","/css/*").permitAll()
 				.requestMatchers("saveuser","/css/*").permitAll()

@@ -23,6 +23,14 @@ public class Project {
     @Column(name="status")
     private  String status;
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     @ManyToOne
     @JoinColumn(name="freelancer_id")
     private freelancer freelancers;

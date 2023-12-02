@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" th:href="@{/css/style3.css}">
     <meta charset="UTF-8">
     <title>Title</title>
+
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet " th:href="@{/css/style3.css}">
 </head>
@@ -42,7 +44,7 @@
                 </li>
 
                 <li>
-                    <a th:href="@{/listeprojectadmin}">
+                    <a href="">
                         <span class="las la-clipboard-list"></span>
                         <small>Projects</small>
                     </a>
@@ -103,7 +105,6 @@
             </div>
         </div>
     </header>
-
     <main>
 
         <div class="page-header">
@@ -195,58 +196,62 @@
         </div>
 
         <div class="page-header">
-            <h1>List De Freelancer
-            </h1>
+            <h1>List De Project</h1>
 
             <table width="100%">
                 <thead >
                 <tr style="  font-size: 25px">
                     <th >Id</th>
-                    <th><span class="las la-sort"></span> FullName</th>
-                    <th><span class="las la-sort"></span> Email</th>
-                    <th><span class="las la-sort"></span> Phone</th>
-                    <th><span class="las la-sort"></span> Country</th>
+                    <th><span class="las la-sort"></span> client-id</th>
+                    <th><span class="las la-sort"></span> Title</th>
+                    <th><span class="las la-sort"></span> Status</th>
+                    <th><span class="las la-sort"></span> Description</th>
+                    <th><span class="las la-sort"></span> Budget</th>
                     <th><span class="las la-sort"></span> ACTIONS</th>
 
                 </tr>
 
                 </thead>
-    <tbody style="font-size: 20px">
-    <tr th:each="freelancer : ${donneefreelancer}">
-        <th>   <small th:text="${freelancer.id}"></small></th>
-        <th>
-            <div class="client">
+                <tbody style="font-size: 20px">
+                <tr th:each="project : ${projects}">
+                    <th>   <small th:text="${project.id}"></small></th>
+                    <th>
+                        <div class="client">
 
-                <div class="client-info">
+                            <div class="client-info">
 
-                    <small th:text="${freelancer.fullname}"></small>
-                </div>
-            </div>
-        </th>
-        <th >
-            <small th:text="${freelancer.email}"></small>
-        </th>
-        <th>
-            <small th:text="${freelancer.phone}"></small>
-        </th>
-        <th>
-            <small th:text="${freelancer.country}"></small>
-        </th>
-        <th>
-            <div class="actions">
-                <button type="button" class="btn btn-primary btn-sm" style="color:green">Edit</button>
-                <button type="button" class="btn btn-secondary btn-sm" style="color: red">Remove</button>
+                                <small th:text="${project.client}"></small>
+                            </div>
+                        </div>
+                    </th>
+                    <th >
+                        <small th:text="${project.title}"></small>
+                    </th>
+                    <th>
+                        <small th:text="${project.status}"></small>
+                    </th>
+                    <th>
+                        <small th:text="${project.description}"></small>
+                    </th>
+                    <th>
+                        <small th:text="${project.budget}"></small>
+                    </th>
+                  <th>
+                        <div class="actions">
 
-            </div>
+                            <a th:href="@{/deleteproject/{id}(id=${project.id})}">
+                                <button type="button" class="btn btn-secondary btn-sm" style="color: red" >Remove</button></a>
 
-    </tr>
+                        </div>
+                  </th>
+                </tr>
 
-    </tbody>
+                </tbody>
 
 
-</table>
+            </table>
+
         </div>
-
     </main>
 </div>
 </body>

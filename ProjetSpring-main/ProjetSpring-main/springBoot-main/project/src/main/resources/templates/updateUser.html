@@ -284,6 +284,7 @@
             </div>
         </div>
     </header><!-- #header -->
+    <section class="form-container">
    <form th:action="@{/addUser}" th:object="${user}" method="post" enctype="multipart/form-data" style="margin-top: 10rem">
       <h3>update profile</h3>
      <input hidden="hidden" th:field="*{id}"/>

@@ -11,6 +11,13 @@ public class WorkSample {
     private  Long id;
 
 
+    public freelancer getFreelance() {
+        return freelance;
+    }
+
+    public void setFreelance(freelancer freelance) {
+        this.freelance = freelance;
+    }
 
     @Column(name= "description")
     private  String description;

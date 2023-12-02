@@ -160,33 +160,7 @@ public class UserController {
 
 		return "redirect:/donnee";
 	}
-//	@PostMapping("/addUser")
-//	public String addUser(@ModelAttribute ("user") User user)
-//	{
-//		userRepository.save(user);
-//		return "redirect:/donnee";
-//	}
-//	@GetMapping("/profile")
-//	public String showProfile(Model model) {
-//		// Récupérer l'utilisateur actuellement authentifié
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		CustomUserDetail userDetails = (CustomUserDetail) authentication.getPrincipal();
-//
-//		// Récupérer les informations de l'utilisateur
-//
-//		String phone = userDetails.getPhone();
-//		String address = userDetails.getAddresse();
-//		String country = userDetails.getCountry();
-//
-//		// Ajouter les informations au modèle pour les afficher dans la page de profil
-//
-//
-//		model.addAttribute("phone", phone);
-//		model.addAttribute("addresse", address);
-//		model.addAttribute("country", country);
-//
-//		return "client";
-//	}
+
 
 
 }

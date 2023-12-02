@@ -3,8 +3,10 @@ package com.example.project.controller;
 import com.example.project.model.Client;
 import com.example.project.model.Project;
 import com.example.project.model.User;
+import com.example.project.model.WorkSample;
 import com.example.project.repositories.ClientRepository;
 import com.example.project.repositories.ProjectRepo;
+import com.example.project.repositories.WorkSampleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,27 +24,52 @@ public class ProjectController {
 
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private WorkSampleRepo workSampleRepo;
 
     @GetMapping("/listeProject/{clientId}")
     public String home(@PathVariable Long clientId, Model model) {
-        // Récupérer le client
+
         Optional<Client> client = clientRepository.findById(clientId);
 
         if (client.isPresent()) {
-            // Récupérer les projets associés au client
+
             List<Project> projets = projectRepo.findAll();
 
-            // Ajouter les projets et le client à l'objet Model
+
             model.addAttribute("projets", projets);
             model.addAttribute("client", client.get());
 
 
-            // Renvoyer le nom de la vue Thymeleaf
-            return "client";
+            return "listeProject";
         } else {
-            // Gérer le cas où le client n'est pas trouvé
+
             return "redirect:/erreur";
         }
+    }
+    @GetMapping("/listeprojectadmin")
+    public String listProjects(Model model) {
+        List<Project> projects = projectRepo.findAll();
+        model.addAttribute("projects", projects);
+        return "listeproject";
+    }
+    @GetMapping("deleteproject/{id}")
+    public String deleteProject(@PathVariable("id") Long id){
+        projectRepo.deleteById(id);
+
+        return "redirect:/listeprojectadmin";
+    }
+    @GetMapping("/worksampleadmin")
+    public String listWorkSimple(Model model) {
+        List<WorkSample> workSamples = workSampleRepo.findAll();
+        model.addAttribute("worksamples", workSamples);
+        return "listeworksampleadmin";
+    }
+    @GetMapping("deleteworksample/{id}")
+    public String deleteWorkSample(@PathVariable("id") Long id){
+        workSampleRepo.deleteById(id);
+
+        return "redirect:/worksampleadmin";
     }
 
 }

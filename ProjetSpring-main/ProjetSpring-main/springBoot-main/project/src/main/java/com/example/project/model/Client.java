@@ -18,6 +18,7 @@ public class Client extends User {
     public void resetPwd() {
 
     }
+
     @OneToMany(mappedBy = "client")
     private List<Project> projects= new ArrayList<>();
 
