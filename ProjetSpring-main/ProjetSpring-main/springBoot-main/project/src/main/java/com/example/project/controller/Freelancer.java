@@ -5,6 +5,7 @@ import com.example.project.dto.UserDto;
 import com.example.project.model.*;
 import com.example.project.repositories.UserRepository;
 import com.example.project.repositories.WorkSampleRepo;
+import com.example.project.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,6 +26,8 @@ private WorkSampleRepo workSampleRepo;
     private UserRepository userRepository;
     @Autowired
     private UserDetailsService  userDetailsService;
+    @Autowired
+    private JwtService jwtService;
     @GetMapping("/quiz")
     public String getQuizPage(@ModelAttribute("quiz")UserDto userDto) {
         return "quiz";
@@ -64,8 +67,11 @@ public String saveWork(@ModelAttribute("work") WorkSample work, Principal princi
 
     @GetMapping("freelancer-page")
     public String adminPage (Model model, Principal principal) {
+        int freelancerId = jwtService.extractClaim(JwtLocalStorage.getJwt(),claims -> (int) claims.get("id"));
+        List<WorkSample> workSamples =workSampleRepo.findByFreelancer(freelancerId);
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("user", userDetails);
+        model.addAttribute("worksamples", workSamples);
         return "freelancer";
     }
 
