@@ -58,6 +58,8 @@ public class SecurityConfig {
 				.requestMatchers("worksampleadmin" ,"/css/**","/js/**","/img/**").permitAll()
 				.requestMatchers("donneefreelancer","/css/*").permitAll()
 				.requestMatchers("updateuser","/css/*").permitAll()
+				.requestMatchers("/reset-password").permitAll()
+				.requestMatchers("forgot-password").permitAll()
 				.requestMatchers("saveuser","/css/*").permitAll()
 				.requestMatchers("/profilec","/js/**","/css/**").permitAll()
 				.requestMatchers("/ajoutprojet","/js/**","/css/**").permitAll()

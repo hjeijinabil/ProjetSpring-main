@@ -3,8 +3,21 @@ package com.example.project.dto;
 
 public class UserDto {
 	private String email;
+
 	private String password;
+
+	private String resetToken;
+
 	private String role;
+
+	public String getResetToken() {
+		return resetToken;
+	}
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
+	}
+
 	private String fullname;
 	private String phone;
 	private  String addresse;
@@ -45,6 +58,8 @@ public class UserDto {
 		this.addresse = addresse;
 		this.phone = phone;
 		this.country = country;
+
+
 	}
 
 	public String getEmail() {

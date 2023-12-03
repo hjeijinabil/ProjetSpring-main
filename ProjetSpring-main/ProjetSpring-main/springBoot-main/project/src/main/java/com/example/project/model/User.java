@@ -13,6 +13,15 @@ public class User {
 
 	private Long id;
 
+	public String getResetToken() {
+		return resetToken;
+	}
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
+	}
+
+	private String resetToken;
 	private String email;
 	private String password;
 	private String role;
@@ -53,6 +62,8 @@ public class User {
 		this.addresse = addresse;
 	}
 
+
+
 	public User(String email, String password, String role, String fullname, String addresse, String phone, String country) {
 		this.email=email;
 		this.password=password;
@@ -61,6 +72,8 @@ public class User {
 		this.addresse = addresse;
 		this.phone =phone;
 		this.country = country;
+		this.resetToken =resetToken;
+
 
 	}
 
