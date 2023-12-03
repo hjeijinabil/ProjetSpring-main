@@ -35,6 +35,10 @@ public class Project {
     @JoinColumn(name="pr_id")
     private Project pr;
 
+    public void setClient(Client client) {
+        this.client=client;
+    }
+
     public String getTitle() {
         return Title;
     }

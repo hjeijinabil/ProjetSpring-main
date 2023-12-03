@@ -8,8 +8,9 @@ import java.util.Set;
 @Entity
 
 public class Client extends User {
-
-
+    public Client(String email, String role, String fullname, String addresse, String phone, String country,long id) {
+        super(email, role, fullname, addresse, phone, country,id);
+    }
     public Client() {
         super();
     }

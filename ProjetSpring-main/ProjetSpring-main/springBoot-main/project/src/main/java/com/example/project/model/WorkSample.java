@@ -23,6 +23,10 @@ public class WorkSample {
     @JoinColumn(name="freelancer_id")
     private freelancer freelance;
 
+    public void setFreelancer(freelancer freelance) {
+        this.freelance=freelance;
+    }
+
     public Long getId() {
         return id;
     }

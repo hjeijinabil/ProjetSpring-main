@@ -53,7 +53,8 @@ public class User {
 		this.addresse = addresse;
 	}
 
-	public User(String email, String password, String role, String fullname, String addresse, String phone, String country) {
+	public User(String email, String password, String role, String fullname, String addresse, String phone, String country,long id) {
+		this.id = id;
 		this.email=email;
 		this.password=password;
 		this.role=role;
@@ -64,6 +65,27 @@ public class User {
 
 	}
 
+	public User(String email, String role, String fullname, String addresse, String phone, String country,long id) {
+		this.id = id;
+		this.email = email;
+		this.role = role;
+		this.fullname = fullname;
+		this.phone = phone;
+		this.addresse = addresse;
+		this.country = country;
+	}
+
+	public User(String email, String password, String role, String fullname, String addresse, String phone, String country) {
+
+		this.email=email;
+		this.password=password;
+		this.role=role;
+		this.fullname=fullname;
+		this.addresse = addresse;
+		this.phone =phone;
+		this.country = country;
+
+	}
 
 	public Long getId() {
 		return id;

@@ -10,7 +10,9 @@ import java.util.List;
 public class freelancer extends User {
 
 
-
+    public freelancer(String email, String role, String fullname, String addresse, String phone, String country,long id) {
+        super(email, role, fullname, addresse, phone, country,id);
+    }
     public freelancer(String email, String encode, String role, String fullname, String addresse, String country, String phone) {
         super();
     }

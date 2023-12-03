@@ -348,6 +348,34 @@
 									<h4>Budget:</h4><p class="address" th:text="${projet.budget}"><span class="lnr lnr-database"></span>  </p>
 								</div>
 							</div>
+							<div class="single-post d-flex flex-row" th:each="work , iterStat : ${worksamples}">
+								<div class="thumb">
+									<img src="img/post.png" alt="">
+									<ul class="tags">
+										<li>
+											<a href="#">Buy</a>
+										</li>
+										<li><a href="#"><span class="lnr lnr-heart"></span></a></li>
+
+									</ul>
+								</div>
+								<div class="details"  >
+									<div class="title d-flex flex-row justify-content-between">
+										<div class="titles">
+											<a href="single.html"><h4 th:text="${work.id}" ></h4></a>
+											<h4>Title</h4><h6 th:text="${work.title}"></h6>
+										</div>
+										<ul class="btns">
+
+										</ul>
+									</div>
+									<h4>Description</h4>	<p th:text="${work.description}">
+								</p>
+<!--									<h4>Status:</h4><h5 th:text="${projet.status}"></h5>-->
+<!--									<p class="address"><span class="lnr lnr-map"></span> </p>-->
+									<h4>Budget:</h4><p class="address" th:text="${work.price}"><span class="lnr lnr-database"></span>  </p>
+								</div>
+							</div>
 
 							<a class="text-uppercase loadmore-btn mx-auto d-block" href="category.html">Load More job Posts</a>
 

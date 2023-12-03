@@ -9,9 +9,11 @@ import com.example.project.dto.UserDto;
 import com.example.project.model.Client;
 import com.example.project.model.Project;
 import com.example.project.model.User;
+import com.example.project.model.WorkSample;
 import com.example.project.repositories.ClientRepository;
 import com.example.project.repositories.ProjectRepo;
 import com.example.project.repositories.UserRepository;
+import com.example.project.repositories.WorkSampleRepo;
 import com.example.project.service.JwtService;
 import com.example.project.service.UserService;
 import org.antlr.v4.runtime.tree.pattern.ParseTreePattern;
@@ -46,6 +48,8 @@ public class UserController {
 	private JwtService jwtService;
 	@Autowired
 	private ProjectRepo projectRepo;
+	@Autowired
+	private WorkSampleRepo workSampleRepo;
 
 	@GetMapping("/")
 	public String getIndexPage(@ModelAttribute("index") UserDto userDto, Model model) {
@@ -54,20 +58,19 @@ public class UserController {
 //		// Récupérer le client
 //		Optional<Client> client = clientRepository.findByEmail(userEmail);
 //
-//		if (client.isPresent()) {
-			// Récupérer les projets associés au client
+//
 			List<Project> projets = projectRepo.findAll();
 
 			// Ajouter les projets et le client à l'objet Model
 			model.addAttribute("projets", projets);
 //			model.addAttribute("client", client.get());
 
+			List<WorkSample> worksamples = workSampleRepo.findAll();
+			model.addAttribute("worksamples", worksamples);
+
+
 			// Renvoyer le nom de la vue Thymeleaf
 			return "index";
-//		} else {
-//			// Gérer le cas où le client n'est pas trouvé
-//			return "redirect:/erreur";
-//		}
 
 	}
 

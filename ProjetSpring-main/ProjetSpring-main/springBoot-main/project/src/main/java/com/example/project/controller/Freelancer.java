@@ -1,8 +1,8 @@
 package com.example.project.controller;
 
+import com.example.project.configurations.JwtLocalStorage;
 import com.example.project.dto.UserDto;
-import com.example.project.model.User;
-import com.example.project.model.WorkSample;
+import com.example.project.model.*;
 import com.example.project.repositories.UserRepository;
 import com.example.project.repositories.WorkSampleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,19 +30,26 @@ private WorkSampleRepo workSampleRepo;
         return "quiz";
 
     }
-    @GetMapping("/ajoutprojet")
+    @GetMapping("/ajoutwork")
     public String getProfil(Model model) {
         WorkSample work  = new WorkSample();
         model.addAttribute("work",work);
-        return "ajoutprojet";
+        return "addWorksampleFreelancer";
 
     }
-    @PostMapping("/worksample")
-public String saveWork(@ModelAttribute("work") WorkSample work)
+    @PostMapping("/addworksample")
+public String saveWork(@ModelAttribute("work") WorkSample work, Principal principal)
     {
-       workSampleRepo.save(work);
-       return "redirect:/";
+
+
+        User user = userRepository.findByEmail(principal.getName());
+        freelancer fr = new freelancer(user.getEmail(),user.getRole(), user.getFullname(),user.getAddresse(),user.getPhone(),user.getCountry(),user.getId());
+        work.setFreelancer(fr);
+        workSampleRepo.save(work);
+        return "redirect:/";
     }
+
+
     @GetMapping("/listefreelancer")
     public String getListe(@ModelAttribute("listefreelancer")UserDto userDto) {
         return "listefreelancer";
@@ -60,6 +67,17 @@ public String saveWork(@ModelAttribute("work") WorkSample work)
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("user", userDetails);
         return "freelancer";
+    }
+
+    @GetMapping("/updateprofilfreelancer")
+    public String afficherProfil(Model model, Principal principal) {
+        // Obtenez l'utilisateur connecté
+        User utilisateur = userRepository.findByEmail(principal.getName());
+
+        // Ajoutez l'utilisateur au modèle
+        model.addAttribute("utilisateur", utilisateur);
+
+        return "updateprofilfreelancer";
     }
     @GetMapping("/donneefreelancer")
     public String getFreelancer(Model model) {
