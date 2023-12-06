@@ -1,15 +1,21 @@
 package com.example.project.controller;
 
+import com.example.project.configurations.JwtLocalStorage;
 import com.example.project.model.Client;
 import com.example.project.model.Project;
 import com.example.project.model.User;
 import com.example.project.repositories.ClientRepository;
 import com.example.project.repositories.ProjectRepo;
+import com.example.project.repositories.UserRepository;
+import com.example.project.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.List;
@@ -22,6 +28,10 @@ public class ProjectController {
 
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private JwtService jwtService;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/listeProject/{clientId}")
     public String home(@PathVariable Long clientId, Model model) {
@@ -58,5 +68,28 @@ public class ProjectController {
         Project projet = temp.get();
         model.addAttribute("projet", projet);
         return "updateprojet";
+    }@PostMapping("/updateprojet/{id}")
+    public String updateProjet(@PathVariable Long id, @ModelAttribute("projet") Project updatedProject, Principal principal) {
+        int clientId = jwtService.extractClaim(JwtLocalStorage.getJwt(), claims -> (int) claims.get("id"));
+
+        User user = userRepository.findByEmail(principal.getName());
+        Client client = new Client(user.getEmail(), user.getRole(), user.getFullname(), user.getAddresse(), user.getPhone(), user.getCountry(), user.getId());
+
+        // Retrieve the existing project from the repository by ID
+        Project existingProject = projectRepo.findById(id).orElseThrow(() -> new RuntimeException("Project not found"));
+
+        // Update the existing project fields with the new data
+        existingProject.setTitle(updatedProject.getTitle());
+        existingProject.setBudget(updatedProject.getBudget());
+        existingProject.setDescription(updatedProject.getDescription());
+        existingProject.setStatus(updatedProject.getStatus());
+        existingProject.setClient(client);
+
+        // Save the updated project
+        projectRepo.save(existingProject);
+
+        return "redirect:/";
     }
 }
+
+
