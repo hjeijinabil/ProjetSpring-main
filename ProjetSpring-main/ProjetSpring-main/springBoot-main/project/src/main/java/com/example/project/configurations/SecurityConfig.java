@@ -63,6 +63,8 @@ public class SecurityConfig {
 				.requestMatchers("/ajoutprojet","/js/**","/css/**").permitAll()
 				.requestMatchers("/quiz", "/css/**","/js/**").permitAll()
 				.requestMatchers("listefreelancer").permitAll()
+				.requestMatchers("forgot-password").permitAll()
+				.requestMatchers("reset-password").permitAll()
 				.requestMatchers("/editclient", "/csss/**", "/js/**", "/img/**").permitAll()
 				.requestMatchers("/", "/csss/**", "/js/**", "/img/**").permitAll()
 				.requestMatchers("/about", "/csss/**", "/js/**", "/img/**").permitAll()
