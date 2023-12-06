@@ -45,4 +45,18 @@ public class ProjectController {
         }
     }
 
+    @GetMapping("deleteprojett/{id}")
+    public String deleteProjet(@PathVariable("id") Long id){
+        projectRepo.deleteById(id);
+
+        return "redirect:/user-page";
+
+    }
+    @GetMapping("updateProjett/{id}")
+    public String updateProjet(@PathVariable("id") Long id , Model model){
+        Optional<Project> temp = projectRepo.findById(id);
+        Project projet = temp.get();
+        model.addAttribute("projet", projet);
+        return "updateprojet";
+    }
 }

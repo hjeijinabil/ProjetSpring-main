@@ -52,7 +52,9 @@ public class SecurityConfig {
 				.requestMatchers("/registration", "/css/**").permitAll()
 				.requestMatchers("/profilclient", "/css/**","/js/**","/img/**").permitAll()
 				.requestMatchers("/donnee","/css/**").permitAll()
+				.requestMatchers("ajoutwork","/css/**").permitAll()
 				.requestMatchers("/updateprofilclientt","/css/**").permitAll()
+				.requestMatchers("/updateprofilfreelancer").permitAll()
 				.requestMatchers("donneeClient" ,"/css/**","/js/**","/img/**").permitAll()
 				.requestMatchers("donneefreelancer","/css/*").permitAll()
 				.requestMatchers("updateuser","/css/*").permitAll()
@@ -63,6 +65,10 @@ public class SecurityConfig {
 				.requestMatchers("listefreelancer").permitAll()
 				.requestMatchers("/editclient", "/csss/**", "/js/**", "/img/**").permitAll()
 				.requestMatchers("/", "/csss/**", "/js/**", "/img/**").permitAll()
+				.requestMatchers("/about", "/csss/**", "/js/**", "/img/**").permitAll()
+				.requestMatchers("/category", "/csss/**", "/js/**", "/img/**").permitAll()
+				.requestMatchers("/blog", "/csss/**", "/js/**", "/img/**").permitAll()
+				.requestMatchers("/contact", "/csss/**", "/js/**", "/img/**").permitAll()
 				.anyRequest().authenticated())
 
 

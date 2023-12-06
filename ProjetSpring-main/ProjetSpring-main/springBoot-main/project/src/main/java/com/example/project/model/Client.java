@@ -15,6 +15,14 @@ public class Client extends User {
         super();
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
     @Override
     public void resetPwd() {
 

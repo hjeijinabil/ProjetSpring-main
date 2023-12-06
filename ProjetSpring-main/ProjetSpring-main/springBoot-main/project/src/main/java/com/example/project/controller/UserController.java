@@ -73,7 +73,22 @@ public class UserController {
 			return "index";
 
 	}
-
+	@GetMapping("/about")
+	public String getAbout(@ModelAttribute("about") UserDto userDto, Model model) {
+		return "about-us";
+	}
+	@GetMapping("/category")
+	public String getCategory(@ModelAttribute("category") UserDto userDto, Model model) {
+		return "category";
+	}
+	@GetMapping("/blog")
+	public String getBlog(@ModelAttribute("blog") UserDto userDto, Model model) {
+		return "blog-home";
+	}
+	@GetMapping("/contact")
+	public String getContact(@ModelAttribute("contact") UserDto userDto, Model model) {
+		return "contact";
+	}
 	@GetMapping("/registration")
 	public String getRegistrationPage(@ModelAttribute("user") UserDto userDto) {
 		return "enregistre";
@@ -95,8 +110,11 @@ public class UserController {
 	
 	@GetMapping("user-page")
 	public String userPage (Model model, Principal principal) {
+		int clientId = jwtService.extractClaim(JwtLocalStorage.getJwt(),claims -> (int) claims.get("id"));
+		List<Project> projets = projectRepo.findByClient(clientId);
 		UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
 		model.addAttribute("user", userDetails);
+		model.addAttribute("projets", projets);
 		return "client";
 	}
 	@GetMapping("/donnee")
