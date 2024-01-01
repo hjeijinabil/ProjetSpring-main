@@ -49,6 +49,8 @@ public class SecurityConfig {
 
 		.authorizeHttpRequests(request -> request.requestMatchers("/freelancer-page")
 				.hasAuthority("freelancer").requestMatchers("/user-page").hasAuthority("client").requestMatchers("/admin-page","/css/**").hasAuthority("admin")
+				.requestMatchers("/listWorkSample", "/css/**").permitAll()
+				.requestMatchers("/worktest", "/css/**").permitAll()
 				.requestMatchers("/registration", "/css/**").permitAll()
 				.requestMatchers("/profilclient", "/css/**","/js/**","/img/**").permitAll()
 				.requestMatchers("/donnee","/css/**").permitAll()

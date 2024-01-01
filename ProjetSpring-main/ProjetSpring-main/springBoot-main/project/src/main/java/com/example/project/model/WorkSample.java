@@ -23,6 +23,20 @@ public class WorkSample {
     @JoinColumn(name="freelancer_id")
     private freelancer freelance;
 
+    public WorkSample() {
+
+    }
+    public WorkSample(Long id, String description, String price, String title, long client_id,String client_email,String client_fullname) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.freelance = new freelancer();
+        this.freelance.setId(client_id);
+        this.freelance.setEmail(client_email);
+        this.freelance.setFullname(client_fullname);
+    }
+
     public void setFreelancer(freelancer freelance) {
         this.freelance=freelance;
     }
@@ -63,6 +77,8 @@ public class WorkSample {
         this.description = description;
     }
 
-
+    public freelancer getFreelance() {
+        return freelance;
+    }
 }
 
