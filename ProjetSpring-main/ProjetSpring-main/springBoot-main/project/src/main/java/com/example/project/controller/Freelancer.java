@@ -3,6 +3,7 @@ package com.example.project.controller;
 import com.example.project.configurations.JwtLocalStorage;
 import com.example.project.dto.UserDto;
 import com.example.project.model.*;
+import com.example.project.repositories.ReviewRepository;
 import com.example.project.repositories.UserRepository;
 import com.example.project.repositories.WorkSampleRepo;
 import com.example.project.service.JwtService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
@@ -20,6 +22,8 @@ import java.util.List;
 
 @Controller
 public class Freelancer {
+    @Autowired
+    private ReviewRepository reviewRepository;
 @Autowired
 private WorkSampleRepo workSampleRepo;
     @Autowired
@@ -74,6 +78,24 @@ public String saveWork(@ModelAttribute("work") WorkSample work, Principal princi
         model.addAttribute("worksamples", workSamples);
         return "freelancer";
     }
+
+    @GetMapping("freelancer/{id}")
+    public String userPage (@PathVariable("id") int id, Model model, Principal principal) {
+//		int clientId = jwtService.extractClaim(JwtLocalStorage.getJwt(),claims -> (int) claims.get("id"));
+        List<WorkSample> workSamples =workSampleRepo.findByFreelancer(id);
+        User user = userRepository.findByEmail(principal.getName());
+        Review review =null;
+//        Review review= reviewRepository.getReviewByFreelancerId(id);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("user", userDetails);
+        model.addAttribute("review", review);
+        model.addAttribute("id", id);
+        model.addAttribute("clientid", user.getId());
+        model.addAttribute("worksamples", workSamples);
+        return "publicFreelancer";
+    }
+
+
 
     @GetMapping("/updateprofilfreelancer")
     public String afficherProfil(Model model, Principal principal) {

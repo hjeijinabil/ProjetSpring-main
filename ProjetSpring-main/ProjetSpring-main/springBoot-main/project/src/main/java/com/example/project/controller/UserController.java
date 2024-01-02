@@ -6,14 +6,8 @@ import java.util.Optional;
 
 import com.example.project.configurations.JwtLocalStorage;
 import com.example.project.dto.UserDto;
-import com.example.project.model.Client;
-import com.example.project.model.Project;
-import com.example.project.model.User;
-import com.example.project.model.WorkSample;
-import com.example.project.repositories.ClientRepository;
-import com.example.project.repositories.ProjectRepo;
-import com.example.project.repositories.UserRepository;
-import com.example.project.repositories.WorkSampleRepo;
+import com.example.project.model.*;
+import com.example.project.repositories.*;
 import com.example.project.service.JwtService;
 import com.example.project.service.UserService;
 import org.antlr.v4.runtime.tree.pattern.ParseTreePattern;
@@ -39,6 +33,9 @@ public class UserController {
 	private UserDetailsService userDetailsService;
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private ReviewRepository reviewRepository;
 	
 @Autowired
 	private UserService userService;
@@ -116,6 +113,19 @@ public class UserController {
 		model.addAttribute("user", userDetails);
 		model.addAttribute("projets", projets);
 		return "client";
+	}
+
+	@GetMapping("user-page/{id}")
+	public String userPage (@PathVariable("id") int id,Model model, Principal principal) {
+//		int clientId = jwtService.extractClaim(JwtLocalStorage.getJwt(),claims -> (int) claims.get("id"));
+		List<Project> projets = projectRepo.findByClient(id);
+		Review review= reviewRepository.getReviewByFreelancerId(id);
+		UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+		model.addAttribute("user", userDetails);
+		model.addAttribute("review", review);
+		model.addAttribute("id", id);
+		model.addAttribute("projets", projets);
+		return "publicClient";
 	}
 	@GetMapping("/donnee")
 	public String GetFreelancer(Model model){
