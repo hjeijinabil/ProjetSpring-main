@@ -19,10 +19,10 @@ public class RateServiceImp implements RateService {
 
         System.out.println("hello3");
         if (review == null) review= new Review();
-        double totalRating = review.getAverageRating() * review.getTotalRatings();
+//        double totalRating = review.getAverageRating() * review.getTotalRatings();
         review.setTotalRatings(review.getTotalRatings() + 1);
-        review.setAverageRating((totalRating + rating) / review.getTotalRatings());
-
+//        review.setAverageRating((totalRating + rating) / review.getTotalRatings());
+            review.setAverageRating(rating);
         freelancer freelancer = new freelancer();
         freelancer.setId(id);
         review.setFreelancer(freelancer);

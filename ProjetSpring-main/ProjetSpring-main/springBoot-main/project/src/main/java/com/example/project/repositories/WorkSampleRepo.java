@@ -18,4 +18,6 @@ public interface WorkSampleRepo extends JpaRepository<WorkSample,Long> {
     List<WorkSample> findAllWorkSamplesWithFreelancer();
 
 
+
+
 }

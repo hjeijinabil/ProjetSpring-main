@@ -51,6 +51,7 @@ public class SecurityConfig {
 				.hasAuthority("freelancer").requestMatchers("/user-page").hasAuthority("client").requestMatchers("/admin-page","/css/**").hasAuthority("admin")
 				.requestMatchers("/listWorkSample", "/css/**").permitAll()
 				.requestMatchers("/worktest", "/css/**").permitAll()
+				.requestMatchers("//buywork", "/css/**").permitAll()
 				.requestMatchers("/registration", "/css/**").permitAll()
 				.requestMatchers("/profilclient", "/css/**","/js/**","/img/**").permitAll()
 				.requestMatchers("/donnee","/css/**").permitAll()

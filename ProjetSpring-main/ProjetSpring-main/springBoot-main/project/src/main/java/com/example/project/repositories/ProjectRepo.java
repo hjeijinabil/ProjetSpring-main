@@ -1,6 +1,7 @@
 package com.example.project.repositories;
 
 import com.example.project.model.Project;
+import com.example.project.model.WorkSample;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

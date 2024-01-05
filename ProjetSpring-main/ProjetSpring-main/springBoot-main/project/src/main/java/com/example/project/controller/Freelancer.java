@@ -85,7 +85,9 @@ public String saveWork(@ModelAttribute("work") WorkSample work, Principal princi
         List<WorkSample> workSamples =workSampleRepo.findByFreelancer(id);
         User user = userRepository.findByEmail(principal.getName());
         Review review =null;
-//        Review review= reviewRepository.getReviewByFreelancerId(id);
+        review= reviewRepository.getReviewByFreelancerIdAndClientId((long)id,user.getId());
+        if (review != null) System.out.println("review is "+review.getAverageRating());
+        if (review == null) System.out.println("empty");
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("user", userDetails);
         model.addAttribute("review", review);

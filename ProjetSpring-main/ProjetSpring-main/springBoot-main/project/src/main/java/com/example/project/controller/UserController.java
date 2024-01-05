@@ -56,15 +56,17 @@ public class UserController {
 //		Optional<Client> client = clientRepository.findByEmail(userEmail);
 //
 //
-			List<Project> projets = projectRepo.findAll();
+			List<Project> projets = projectRepo.findAllProjectsWithClient();
 
 			// Ajouter les projets et le client à l'objet Model
 			model.addAttribute("projets", projets);
 //			model.addAttribute("client", client.get());
 
-			List<WorkSample> worksamples = workSampleRepo.findAll();
+//			List<WorkSample> worksamples = workSampleRepo.findAll();
+			List<WorkSample> worksamples = workSampleRepo.findAllWorkSamplesWithFreelancer();
+			System.out.println(worksamples.get(0).getFreelance().getEmail());
 			model.addAttribute("worksamples", worksamples);
-
+			System.out.println("working");
 
 			// Renvoyer le nom de la vue Thymeleaf
 			return "index";
@@ -120,10 +122,12 @@ public class UserController {
 //		int clientId = jwtService.extractClaim(JwtLocalStorage.getJwt(),claims -> (int) claims.get("id"));
 		List<Project> projets = projectRepo.findByClient(id);
 		Review review= reviewRepository.getReviewByFreelancerId(id);
+//		User user = userRepository.findByEmail(principal.getName());
 		UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
 		model.addAttribute("user", userDetails);
 		model.addAttribute("review", review);
 		model.addAttribute("id", id);
+
 		model.addAttribute("projets", projets);
 		return "publicClient";
 	}

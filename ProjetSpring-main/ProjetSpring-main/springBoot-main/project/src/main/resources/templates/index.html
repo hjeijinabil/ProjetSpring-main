@@ -325,7 +325,7 @@
 									<img src="img/post.png" alt="">
 									<ul class="tags">
 										<li>
-											<a href="#">Apply</a>
+											<a th:href="@{/applywork/{offreid}/{clientemail}(offreid=${projet.id}, clientemail=${projet.client.email})}">Apply</a>
 										</li>
 										<li><a href="#"><span class="lnr lnr-heart"></span></a></li>
 
@@ -351,13 +351,22 @@
 							<div class="single-post d-flex flex-row" th:each="work , iterStat : ${worksamples}">
 								<div class="thumb">
 									<img src="img/post.png" alt="">
+<!--											<form th:action="@{'/buy/work/' + ${work.id} + '/' + ${work.freelance.email}}" method="post">-->
+<!--									<form th:action="@{/buy/work/}" method="post">-->
 									<ul class="tags">
 										<li>
-											<a href="#">Buy</a>
+<!--											<form th:action="@{'/buywork/' + ${work.id} + '/' + ${work.freelance.email}}" method="get">-->
+<!--												<button type="submit">-->
+<!--													Buy-->
+<!--												</button>-->
+<!--											</form>-->
+
+											<a th:href="@{/buywork/{workid}/{freelanceremail}(workid=${work.id}, freelanceremail=${work.freelance.email})}">Buy</a>
 										</li>
 										<li><a href="#"><span class="lnr lnr-heart"></span></a></li>
 
 									</ul>
+<!--											</form>-->
 								</div>
 								<div class="details"  >
 									<div class="title d-flex flex-row justify-content-between">

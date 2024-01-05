@@ -80,5 +80,7 @@ public class WorkSample {
     public freelancer getFreelance() {
         return freelance;
     }
+
+
 }
 

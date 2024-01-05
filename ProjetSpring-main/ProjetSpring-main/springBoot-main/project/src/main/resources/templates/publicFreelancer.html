@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <div class="card mt-3">
-<!--                    <div th:if="review == null">-->
+                    <div th:if="review != null ? true : false">
                     <form th:action="@{'/rateFreelancer/' + ${id} + '/' + ${clientid}}" method="post">
                         <label for="rating">Rate this freelancer:</label>
                         <select name="rating" id="rating">
@@ -154,10 +154,10 @@
                         </select>
                         <button type="submit" class="btn-primary">Submit Rating</button>
                     </form>
-<!--                    </div>-->
-<!--                    <div th:if="review != null">Rate : <p th:text="@{review.getAverageRating()}"></p>-->
+                    </div>
+                    <div th:if="review != null">Rate : <p th:text="${review != null ? review.getAverageRating() : 'Not rated'}"></p>
 <!--                        Total rating : <p th:text="@{review.getTotalRating()}"></p>-->
-<!--                    </div>-->
+                    </div>
 
 <!--                    <ul class="list-group list-group-flush">-->
 <!--                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">-->

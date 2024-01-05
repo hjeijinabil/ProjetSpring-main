@@ -64,7 +64,17 @@ public class Review {
     private Client client;
 
 
-//    public  void calculReview();
+    public Review(Long id, double averageRating, int totalRatings, long freelancer, long client) {
+        this.freelancer = new freelancer();
+        this.client = new Client();
+        this.id = id;
+        this.averageRating = averageRating;
+        this.totalRatings = totalRatings;
+        this.freelancer.setId(freelancer);
+        this.client.setId(client);
+    }
+
+    //    public  void calculReview();
     public void setFreelancer(freelancer freelancer) {
         this.freelancer = freelancer;
     }
