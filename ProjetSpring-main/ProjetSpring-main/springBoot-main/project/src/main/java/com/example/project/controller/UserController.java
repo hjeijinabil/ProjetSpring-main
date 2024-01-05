@@ -50,8 +50,19 @@ public class UserController {
 
 	@GetMapping("/")
 	public String getIndexPage(@ModelAttribute("index") UserDto userDto, Model model) {
-//		String jwt = JwtLocalStorage.getJwt();
-//		String userEmail = jwtService.extractUsername(jwt);
+		String jwt = JwtLocalStorage.getJwt();
+
+		User user = null;
+		if (jwt != null) {
+			String userEmail = jwtService.extractUsername(jwt);
+			user = userRepository.findByEmail(userEmail);
+		}
+
+		model.addAttribute("user", user);
+
+
+
+
 //		// Récupérer le client
 //		Optional<Client> client = clientRepository.findByEmail(userEmail);
 //

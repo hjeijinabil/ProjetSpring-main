@@ -54,8 +54,13 @@
 				            </ul>
 				          </li>
 
-				          <li><a class="ticker-btn" th:href="@{/registration}">Signup</a></li>
-				          <li><a class="ticker-btn" th:href="@{/login}">Login</a></li>
+							  <li th:if="${user} == null"><a class="ticker-btn" th:href="@{/registration}">Signup</a></li>
+							  <li th:if="${user} == null"><a class="ticker-btn" th:href="@{/login}">Login</a></li>
+
+
+							<li th:if="${user} != null"><a href="/user-page" th:if="${user.getRole()} == 'client'"  th:text="${user.getFullname()}"></a></li>
+							<li th:if="${user} != null"><a href="/freelancer-page" th:if="${user.getRole()} == 'freelancer'" th:text="${user.getFullname()}"></a></li>
+							<li th:if="${user} != null"><a class="ticker-btn" th:href="@{/logout}">Logout</a></li>
 
 				        </ul>
 				      </nav><!-- #nav-menu-container -->
