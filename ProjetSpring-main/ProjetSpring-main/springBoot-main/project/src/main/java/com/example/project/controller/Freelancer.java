@@ -103,12 +103,13 @@ public String saveWork(@ModelAttribute("work") WorkSample work, Principal princi
     public String userPage (@PathVariable("id") int id, Model model, Principal principal) {
 //		int clientId = jwtService.extractClaim(JwtLocalStorage.getJwt(),claims -> (int) claims.get("id"));
         List<WorkSample> workSamples =workSampleRepo.findByFreelancer(id);
-        User user = userRepository.findByEmail(principal.getName());
+        User user = userRepository.findUserById((long)id);
+        System.out.println("user is "+user.getEmail());
         Review review =null;
         review= reviewRepository.getReviewByFreelancerIdAndClientId((long)id,user.getId());
         if (review != null) System.out.println("review is "+review.getAverageRating());
         if (review == null) System.out.println("empty");
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
         model.addAttribute("user", userDetails);
         model.addAttribute("review", review);
         model.addAttribute("id", id);
