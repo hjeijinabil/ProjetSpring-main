@@ -88,7 +88,7 @@ public class ProjectController {
         // Save the updated project
         projectRepo.save(existingProject);
 
-        return "redirect:/";
+        return "redirect:/user-page";
     }
 }
 

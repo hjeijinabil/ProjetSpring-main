@@ -53,7 +53,7 @@ public String saveWork(@ModelAttribute("work") WorkSample work, Principal princi
         freelancer fr = new freelancer(user.getEmail(),user.getRole(), user.getFullname(),user.getAddresse(),user.getPhone(),user.getCountry(),user.getId());
         work.setFreelancer(fr);
         workSampleRepo.save(work);
-        return "redirect:/";
+        return "redirect:/freelancer-page";
     }
 
 
