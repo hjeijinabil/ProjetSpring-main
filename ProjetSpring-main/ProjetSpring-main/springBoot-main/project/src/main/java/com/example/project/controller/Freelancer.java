@@ -8,6 +8,7 @@ import com.example.project.repositories.UserRepository;
 import com.example.project.repositories.WorkSampleRepo;
 import com.example.project.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
@@ -18,16 +19,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class Freelancer {
+
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private ReviewRepository reviewRepository;
 @Autowired
 private WorkSampleRepo workSampleRepo;
-    @Autowired
-    private UserRepository userRepository;
+
     @Autowired
     private UserDetailsService  userDetailsService;
     @Autowired
@@ -58,10 +62,26 @@ public String saveWork(@ModelAttribute("work") WorkSample work, Principal princi
 
 
     @GetMapping("/listefreelancer")
-    public String getListe(@ModelAttribute("listefreelancer")UserDto userDto) {
-        return "listefreelancer";
+    public String afficherListProject(Authentication authentication, Model model) {
+//        User user = (User) authentication.getPrincipal();
 
+        List<User> freelances = userRepository.findByRole("freelancer");
+        List<List<User>> chunkedList = chunkList(freelances, 3); // Chunk the list into sublists of size 3
+
+
+        model.addAttribute("chunkedList", chunkedList);
+
+        return "listefreelancer";
     }
+
+    private <T> List<List<T>> chunkList(List<T> list, int chunkSize) {
+        List<List<T>> chunks = new ArrayList<>();
+        for (int i = 0; i < list.size(); i += chunkSize) {
+            chunks.add(list.subList(i, Math.min(i + chunkSize, list.size())));
+        }
+        return chunks;
+    }
+
     @GetMapping("/client")
     public String getClienPage(@ModelAttribute("client")UserDto userDto) {
         return "client";
