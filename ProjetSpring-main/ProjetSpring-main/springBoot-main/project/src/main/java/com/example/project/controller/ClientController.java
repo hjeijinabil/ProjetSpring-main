@@ -72,7 +72,7 @@ public class ClientController {
         Client client = new Client(user.getEmail(),user.getRole(), user.getFullname(),user.getAddresse(),user.getPhone(),user.getCountry(),user.getId());
         project.setClient(client);
         projectRepo.save(project);
-        return "redirect:/";
+        return "redirect:/user-page";
     }
     @GetMapping("/profilec")
     public String profilClient(@ModelAttribute("profilec") UserDto userDto) {
