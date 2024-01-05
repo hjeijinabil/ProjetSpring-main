@@ -88,31 +88,8 @@ public class BuyController {
         return "about-us";
     }
 
-    @GetMapping("/listProjects")
-    public String afficherListProject(Authentication authentication, Model model) {
-//        User user = (User) authentication.getPrincipal();
 
-        List<Project> projets = projectRepo.findAllProjectsWithClient();
-        List<List<Project>> chunkedList = chunkList(projets, 3); // Chunk the list into sublists of size 3
-
-//        System.out.println("aa "+projets.get(0).getClient());
-//        List<Project> pp = projectRepo.findAllProjects();
-//        System.out.println("aa "+pp.get(0).getClient());
-
-//        System.out.println(projets.get(0).getClient().getId());
-        // Ajouter les projets et le client à l'objet Model
-
-        model.addAttribute("chunkedList", chunkedList);
-
-        return "list-projects";
-    }
 
     // Chunking method to break list into sublists of specified size
-    private <T> List<List<T>> chunkList(List<T> list, int chunkSize) {
-        List<List<T>> chunks = new ArrayList<>();
-        for (int i = 0; i < list.size(); i += chunkSize) {
-            chunks.add(list.subList(i, Math.min(i + chunkSize, list.size())));
-        }
-        return chunks;
-    }
+
 }

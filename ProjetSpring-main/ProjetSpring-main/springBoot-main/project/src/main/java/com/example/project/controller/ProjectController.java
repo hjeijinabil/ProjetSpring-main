@@ -9,6 +9,7 @@ import com.example.project.repositories.ProjectRepo;
 import com.example.project.repositories.UserRepository;
 import com.example.project.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +34,27 @@ public class ProjectController {
     private JwtService jwtService;
     @Autowired
     private UserRepository userRepository;
+
+    @GetMapping("/listOffres")
+    public String afficherListProject(Authentication authentication, Model model) {
+//        User user = (User) authentication.getPrincipal();
+
+        List<Project> projets = projectRepo.findAllProjectsWithClient();
+        List<List<Project>> chunkedList = chunkList(projets, 3); // Chunk the list into sublists of size 3
+
+
+        model.addAttribute("chunkedList", chunkedList);
+
+        return "list-projects";
+    }
+
+    private <T> List<List<T>> chunkList(List<T> list, int chunkSize) {
+        List<List<T>> chunks = new ArrayList<>();
+        for (int i = 0; i < list.size(); i += chunkSize) {
+            chunks.add(list.subList(i, Math.min(i + chunkSize, list.size())));
+        }
+        return chunks;
+    }
 
     @GetMapping("/listeProject/{clientId}")
     public String home(@PathVariable Long clientId, Model model) {
